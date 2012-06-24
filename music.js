@@ -1,6 +1,6 @@
 var music = {
 0:'始まりの時',
-1:'song/sample/sample.mp3',
+1:'song/sample/sample.wav',
 2:53,
 3:'-Senses Circuit-',
 4:'Easy',
