@@ -22,7 +22,7 @@ var Maxcombo = 0;
 var EndMark = 0; //終わった譜面カウント
 var seekW = 280 /M_time; //進行度
 var NowPlay = 0;//連続再生防止用
-
+//配列
 var button = []; //領域配列
 var mark = []; //マーク配列
 
