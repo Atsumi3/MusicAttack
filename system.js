@@ -1,6 +1,6 @@
 enchant();
 
-//***定数セット***//
+//**定数セット**//
 var MSize = 100; //ボタンの大きさ
 var BACK_IMG = "img/back.jpg";
 var Title = music[0];
