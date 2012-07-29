@@ -43,7 +43,7 @@ window.onload = function () {
                         score.add(Math.floor(exScore * 0.8)); combo++; new HitLabel(ShowData, "Good", "#ccff00", bx, bl);
                     }
                     else {
-                        score += 0; combo = 0; new HitLabel(ShowData, "Bad", "#cc0066", bx, bl);
+                        score.add(0); combo = 0; new HitLabel(ShowData, "Bad", "#cc0066", bx, bl);
                     }
                     if (combo > Maxcombo) Maxcombo = combo;
                     this.remove(obj);
