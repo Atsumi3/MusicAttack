@@ -68,13 +68,16 @@ window.onload = function () {
         CircleS.drawCircle(50, 50, 30);
         for (var i = 0; i < 3; i++) button[i] = new Button(calc(12, i), (i == 1) ? 32 : 80, CircleS, MSize, GameField);
 
+        //var bar = new Bar(280, 10, 20, 5);
         var bar = new Bar(280, 10, 20, 5);
         var progress = new Sprite(20, 20);
         progress.x = 10; progress.y = 0;
         progress.image = game.assets[SET_PROG];
 
-        //var showInfo = new ShowLabel(ShowData,10,200,format("曲　 名：{0}<br>作曲者：{1}<br>ＭＯＤＥ：{2}",Title,Composer,Diff));
-        var status = new ShowLabel(ShowData, 230, 200, format("SCORE：{0}<br>COMBO：{1}", score.score * 10, combo));
+        var showScore = new MutableText(30, 200, game.width, "");
+        var showCombo = new MutableText(30, 230, game.width, "");
+        ShowData.addChild(showScore);
+        ShowData.addChild(showCombo);
 
         game.addMark = function (ary, frame, count) {
             for (var i = EndMark; i < count; i++) {
@@ -86,8 +89,7 @@ window.onload = function () {
         }
         game.addEventListener(Event.ENTER_FRAME, function () {
             var time = Math.floor(game.assets[Music].currentTime * game.fps);
-            if (NowPlay < Math.floor(game.assets[Music].currentTime))
-            {
+            if (NowPlay < Math.floor(game.assets[Music].currentTime)) {
                 NowPlay = Math.floor(game.assets[Music].currentTime);
             }
             if (gameStart) {
@@ -95,8 +97,10 @@ window.onload = function () {
                 game.time++;
                 this.addMark(setMark, time, elem);
                 if (game.time % game.fps == 0 && Math.floor(game.time / game.fps) <= M_time) progress.x += seekW;
-                status.text = format("SCORE：{0}<br>COMBO：{1}", score.score * 10, combo);
-                //status.text = format("gameStart:{0}<br>current:{1}", gameStart, game.assets[Music].currentTime);
+                showScore.setText("SCORE："+score.score * 10);
+                showCombo.setText("COMBO："+combo);
+
+                //status.setText(format("gameStart:{0}", gameStart, game.assets[Music].currentTime));
                 if (score.Toscore >= score.score) {
                     var a = score.Toscore - score.score;
                     if (a >= 1 && a < 10) score.score += 1;
