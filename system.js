@@ -8,12 +8,15 @@ var Music = music[1];
 var M_time = music[2];
 var Composer = music[3];
 var Diff = music[4];
-var SET_ANIM = "img/hanabi.png";
+var SET_ANIM_EXC = "img/hanabi_exc.png";
+var SET_ANIM_GOOD = "img/hanabi_good.png";
+var SET_ANIM_BAD = "img/hanabi_bad.png";
 var SET_ANIM_x = 200; //アニメーション画像の横幅
 var SET_ANIM_NUM = 12; //枚数
 var SET_MARK = "img/mark.gif";
 var SET_PROG = "img/seek.png";
 var FULL_COMBO = "song/fullcombo.mp3"; //フルコンボの音
+var BAD_SE = "song/bad.mp3"; //BADを出した時の音
 var PlayFlag = true;
 
 //***グローバル変数***//

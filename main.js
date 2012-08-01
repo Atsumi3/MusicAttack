@@ -2,7 +2,7 @@ window.onload = function () {
     var game = new Game(320, 320);
     game.fps = 60;
     game.time = 0;
-    game.preload(SET_ANIM, SET_MARK, SET_PROG, BACK_IMG, Music, FULL_COMBO);
+    game.preload(SET_ANIM_EXC, SET_ANIM_GOOD, SET_ANIM_BAD, SET_MARK, SET_PROG, BACK_IMG, Music, FULL_COMBO, BAD_SE);
 
     game.rootScene.backgroundColor = "#6699cc";
     var EndTime = (M_time * game.fps) + 60;
@@ -12,11 +12,11 @@ window.onload = function () {
             enchant.Sprite.call(this, img_size, img_size);
             this.x = x; this.y = button[lane].y + 300;
             this.image = img;
+            this.bad = Pobj.assets[BAD_SE].clone();
             this.addEventListener(Event.ENTER_FRAME, function (e) {
                 this.y -= 1;
                 if (-100 > this.y) {
-                    combo = 0;
-                    this.remove(obj);
+                    combo = 0; this.remove(obj);
                 }
             });
             this.addEventListener(Event.TOUCH_START, function (e) {
@@ -29,21 +29,25 @@ window.onload = function () {
                 }
                 if (bl - 100 < this.y && bl + 50 > this.y) {
                     var judge = bl + 20;
-                    var blast = new Pon(this.x - 72, this.y - 60, game.assets[SET_ANIM], SET_ANIM_NUM, SET_ANIM_x, this, Pobj.rootScene);
                     if (this.y >= judge - 50 && this.y < judge - 2) //Good
                     {
                         score.add(Math.floor(exScore * 0.8)); combo++; new HitLabel(ShowData, "Good", "#ccff00", bx, bl);
+                        var blast = new Pon(this.x - 72, this.y - 60, Pobj.assets[SET_ANIM_GOOD], SET_ANIM_NUM, SET_ANIM_x, this, Pobj.rootScene);
                     }
                     else if (this.y >= judge - 2 && this.y < judge + 2) //Excellent
                     {
                         score.add(Math.floor(exScore)); combo++; new HitLabel(ShowData, "Excellent", "#cc0000", bx - 20, bl);
+                        var blast = new Pon(this.x - 72, this.y - 60, Pobj.assets[SET_ANIM_EXC], SET_ANIM_NUM, SET_ANIM_x, this, Pobj.rootScene);
                     }
-                    else if (this.y >= judge + 2 && this.y < judge + 50) //Good
+                    else if (this.y >= judge + 2 && this.y < judge + 20) //Good
                     {
                         score.add(Math.floor(exScore * 0.8)); combo++; new HitLabel(ShowData, "Good", "#ccff00", bx, bl);
+                        var blast = new Pon(this.x - 72, this.y - 60, Pobj.assets[SET_ANIM_GOOD], SET_ANIM_NUM, SET_ANIM_x, this, Pobj.rootScene);
                     }
                     else {
                         score.add(0); combo = 0; new HitLabel(ShowData, "Bad", "#cc0066", bx, bl);
+                        var blast = new Pon(this.x - 72, this.y - 60, Pobj.assets[SET_ANIM_BAD], SET_ANIM_NUM, SET_ANIM_x, this, Pobj.rootScene);
+                        this.bad.play();
                     }
                     if (combo > Maxcombo) Maxcombo = combo;
                     this.remove(obj);
@@ -83,17 +87,16 @@ window.onload = function () {
         game.addEventListener(Event.ENTER_FRAME, function () {
             var time = Math.floor(game.assets[Music].currentTime * game.fps);
             if (NowPlay < Math.floor(game.assets[Music].currentTime))
-            { NowPlay = Math.floor(game.assets[Music].currentTime); }
-            if (gameStart && NowPlay == Math.floor(game.assets[Music].currentTime)) {
-                game.assets[Music].play();
-            } else {
-                game.assets[Music].stop();
+            {
+                NowPlay = Math.floor(game.assets[Music].currentTime);
             }
             if (gameStart) {
+                game.assets[Music].play();
                 game.time++;
                 this.addMark(setMark, time, elem);
                 if (game.time % game.fps == 0 && Math.floor(game.time / game.fps) <= M_time) progress.x += seekW;
                 status.text = format("SCORE：{0}<br>COMBO：{1}", score.score * 10, combo);
+                //status.text = format("gameStart:{0}<br>current:{1}", gameStart, game.assets[Music].currentTime);
                 if (score.Toscore >= score.score) {
                     var a = score.Toscore - score.score;
                     if (a >= 1 && a < 10) score.score += 1;
@@ -103,10 +106,9 @@ window.onload = function () {
                     if (a >= 10000 && a < 100000) score.score += 1000;
                 }
                 if (game.time == EndTime) {
-                    NowPlay = 65535;
+                    gameStart == false;
                     score.add(Maxcombo * exScore);
                     if (combo == elem) game.assets[FULL_COMBO].play();
-                    PlayFlag = false;
                     game.end(score.score * 10, "あなたのスコアは" + score.score * 10);
                 }
             }
