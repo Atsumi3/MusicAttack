@@ -60,7 +60,7 @@ var Bar = Class.create(Sprite,{
 	initialize:function(sx,sy,x,y){
 		enchant.Sprite.call(this,sx,sy);
 		this.x = x; this.y = y;
-		var barElement1 = new Surface(280,10);
+		var barElement1 = new Surface(barWidth, 10);
 		var gradObj = barElement1.context.createLinearGradient( 0, 0, 0, 8);
 		gradObj.addColorStop(   1, '#7F3F3F');
 		gradObj.addColorStop(   0.3, '#3F7F3F');

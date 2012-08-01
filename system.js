@@ -20,10 +20,11 @@ var BAD_SE = "song/bad.mp3"; //BADを出した時の音
 var PlayFlag = true;
 
 //***グローバル変数***//
+var barWidth = 250;
 var combo = 0;
 var Maxcombo = 0;
 var EndMark = 0; //終わった譜面カウント
-var seekW = 280 /M_time; //進行度
+var seekW = barWidth / M_time; //進行度
 var NowPlay = 0;//連続再生防止用
 
 var button = []; //領域配列

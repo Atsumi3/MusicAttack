@@ -68,14 +68,18 @@ window.onload = function () {
         CircleS.drawCircle(50, 50, 30);
         for (var i = 0; i < 3; i++) button[i] = new Button(calc(12, i), (i == 1) ? 32 : 80, CircleS, MSize, GameField);
 
-        //var bar = new Bar(280, 10, 20, 5);
-        var bar = new Bar(280, 10, 20, 5);
-        var progress = new Sprite(20, 20);
-        progress.x = 10; progress.y = 0;
-        progress.image = game.assets[SET_PROG];
+        var bar = new Bar(15, barWidth, 13, 40);
+        var progress1 = new Sprite(20, 20);
+        progress1.x = 10; progress1.y = barWidth+20;
+        progress1.image = game.assets[SET_PROG];
 
-        var showScore = new MutableText(30, 200, game.width, "");
-        var showCombo = new MutableText(30, 230, game.width, "");
+        var bar2 = new Bar(15, barWidth, 290, 40);
+        var progress2 = new Sprite(20, 20);
+        progress2.x = 287; progress2.y = barWidth+20;
+        progress2.image = game.assets[SET_PROG];
+
+        var showScore = new MutableText(0, 10, game.width, "");
+        var showCombo = new MutableText(this.width/2+80, 10, game.width, "");
         ShowData.addChild(showScore);
         ShowData.addChild(showCombo);
 
@@ -96,11 +100,11 @@ window.onload = function () {
                 game.assets[Music].play();
                 game.time++;
                 this.addMark(setMark, time, elem);
-                if (game.time % game.fps == 0 && Math.floor(game.time / game.fps) <= M_time) progress.x += seekW;
-                showScore.setText("SCORE："+score.score * 10);
-                showCombo.setText("COMBO："+combo);
-
-                //status.setText(format("gameStart:{0}", gameStart, game.assets[Music].currentTime));
+                if (game.time % game.fps == 0 && Math.floor(game.time / game.fps) <= M_time) {
+                    progress1.y -= seekW; progress2.y -= seekW;
+                }
+                showScore.setText("SCORE：" + score.score * 10);
+                showCombo.setText("COMBO：" + combo);
                 if (score.Toscore >= score.score) {
                     var a = score.Toscore - score.score;
                     if (a >= 1 && a < 10) score.score += 1;
@@ -121,7 +125,9 @@ window.onload = function () {
         game.rootScene.addChild(lane);
         game.rootScene.addChild(ShowData);
         game.rootScene.addChild(bar);
-        game.rootScene.addChild(progress);
+        game.rootScene.addChild(bar2);
+        game.rootScene.addChild(progress1);
+        game.rootScene.addChild(progress2);
     }
     game.start();
 };
