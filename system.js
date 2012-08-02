@@ -11,10 +11,12 @@ var Diff = music[4];
 var SET_ANIM_EXC = "img/hanabi_exc.png";
 var SET_ANIM_GOOD = "img/hanabi_good.png";
 var SET_ANIM_BAD = "img/hanabi_bad.png";
+var SCORE_BACK_IMG = "img/ScoreBack.png";
 var SET_ANIM_x = 200; //アニメーション画像の横幅
 var SET_ANIM_NUM = 12; //枚数
 var SET_MARK = "img/mark.gif";
 var SET_PROG = "img/seek.png";
+var RESULT_IMG = "img/result.png";
 var FULL_COMBO = "song/fullcombo.mp3"; //フルコンボの音
 var BAD_SE = "song/bad.mp3"; //BADを出した時の音
 var PlayFlag = true;
@@ -30,6 +32,12 @@ var NowPlay = 0;//連続再生防止用
 var button = []; //領域配列
 var mark = []; //マーク配列
 
+//*** 判定格納 ***/
+var exc = 0;
+var god = 0;
+var bad = 0;
+
+
 //***グループ***//
 var ShowData = Group();  //スコア等
 var GameField = Group(); //♂領域
@@ -43,7 +51,7 @@ function format(fmt) {
   return fmt;
 }
 function calc(base,val){
-	return res = base + val*96;
+    return res = base + val * 72;
 }
 function calc_note(ary){
 	var count = 0;
@@ -58,7 +66,7 @@ function calc_note(ary){
 
 function readMark(ary,count)
 {
-	result = ary[100+count].split(":");
+	var result = ary[100+count].split(":");
 	return [result[0],result[1]];
 }
 

@@ -60,8 +60,8 @@ var Bar = Class.create(Sprite,{
 	initialize:function(sx,sy,x,y){
 		enchant.Sprite.call(this,sx,sy);
 		this.x = x; this.y = y;
-		var barElement1 = new Surface(barWidth, 10);
-		var gradObj = barElement1.context.createLinearGradient( 0, 0, 0, 8);
+		var barElement1 = new Surface(10,barWidth);
+		var gradObj = barElement1.context.createLinearGradient( 0, 0,barWidth/2, 32);
 		gradObj.addColorStop(   1, '#7F3F3F');
 		gradObj.addColorStop(   0.3, '#3F7F3F');
 		barElement1.context.fillStyle = gradObj;
@@ -73,61 +73,20 @@ var Bar = Class.create(Sprite,{
 });
 
 var Score = Class.create({
-	initialize:function(){
-		this.score = 0;
-		this.Toscore = 0;
-	},
-	add:function(_score){
-		this.Toscore += _score;
-	}
-});
-var Mark = enchant.Class.create(enchant.Sprite, {
-    initialize: function (Pobj, x, y, img, img_size, group, obj, lane, button) {
-        enchant.Sprite.call(this, img_size, img_size);
-        this.x = x; this.y = button[lane].y + 300;
-        this.image = img;
-        this.bad = Pobj.assets[BAD_SE].clone();
-        this.addEventListener(Event.ENTER_FRAME, function (e) {
-            this.y -= 1;
-            if (-100 > this.y) {
-                combo = 0; this.remove(obj);
-            }
-        });
-        this.addEventListener(Event.TOUCH_START, function (e) {
-            bx = button[lane].x + 30; bl = button[lane].y;
-            for (var i = 0; i < button.length; i++) {
-                var b = button[i];
-                if (b.x < e.x && b.y < e.y && b.x + b.width > e.x && b.y + b.height > e.y) {
-                    b.dispatchEvent(e);
-                }
-            }
-            if (bl - 100 < this.y && bl + 50 > this.y) {
-                var judge = bl + 20;
-                if (this.y >= judge - 50 && this.y < judge - 2) //Good
-                {
-                    score.add(Math.floor(exScore * 0.8)); combo++; new HitLabel(ShowData, "Good", "#ccff00", bx, bl);
-                    var blast = new Pon(this.x - 72, this.y - 60, Pobj.assets[SET_ANIM_GOOD], SET_ANIM_NUM, SET_ANIM_x, this, Pobj.rootScene);
-                }
-                else if (this.y >= judge - 2 && this.y < judge + 2) //Excellent
-                {
-                    score.add(Math.floor(exScore)); combo++; new HitLabel(ShowData, "Excellent", "#cc0000", bx - 20, bl);
-                    var blast = new Pon(this.x - 72, this.y - 60, Pobj.assets[SET_ANIM_EXC], SET_ANIM_NUM, SET_ANIM_x, this, Pobj.rootScene);
-                }
-                else if (this.y >= judge + 2 && this.y < judge + 20) //Good
-                {
-                    score.add(Math.floor(exScore * 0.8)); combo++; new HitLabel(ShowData, "Good", "#ccff00", bx, bl);
-                    var blast = new Pon(this.x - 72, this.y - 60, Pobj.assets[SET_ANIM_GOOD], SET_ANIM_NUM, SET_ANIM_x, this, Pobj.rootScene);
-                }
-                else {
-                    score.add(0); combo = 0; new HitLabel(ShowData, "Bad", "#cc0066", bx, bl);
-                    var blast = new Pon(this.x - 72, this.y - 60, Pobj.assets[SET_ANIM_BAD], SET_ANIM_NUM, SET_ANIM_x, this, Pobj.rootScene);
-                    this.bad.play();
-                }
-                if (combo > Maxcombo) Maxcombo = combo;
-                this.remove(obj);
-            }
-        });
-        obj.addChild(this);
+    initialize: function () {
+        this.score = 0;
+        this.Toscore = 0;
     },
-    remove: function (obj) { obj.removeChild(this); }
+    add: function (_score) {
+        this.Toscore += _score;
+        console.log("----------------------------");
+        console.log("SCORE   ->" + this.score);
+        console.log("TOSCORE ->" + this.Toscore);
+    }
+});
+
+Results = Class.create(MutableText, {
+    initialize: function (_x, _y, _text) {
+        MutableText.call(this, _x, _y, game.width, "");
+    }
 });
