@@ -120,16 +120,15 @@ window.onload = function () {
         var ResultBad;
         var ResultGood;
         var ResultExce;
-
+//a
         var res = new Scene(); ; //リザルト画面
+        res.hoge = 0;
         var bgi = new Sprite(320, 320);
         bgi.image = game.assets[RESULT_IMG];
         res.addChild(bgi);
-        res.end = function () {
-            game.end(score.score * 10, "あなたのスコアは" + score.score * 10 + "点です！");
-        }
         res.addEventListener(Event.ENTER_FRAME, function () {
-            setTimeout("this.end()", 3000);
+            this.hoge++;
+            if (this.hoge > 60) game.end(score.score * 10, "あなたのスコアは" + score.score * 10 + "点です！");
         });
 
         game.addMark = function (ary, frame, count) {
@@ -174,7 +173,6 @@ window.onload = function () {
             } else {
                 game.assets[Music].stop();
                 if (score.score > 100 && score.score == score.Toscore) {
-
                     ShowData.removeChild(showCombo);
 
                     ResultScore = showScore;
