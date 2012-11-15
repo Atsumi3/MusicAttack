@@ -2,6 +2,8 @@ window.onload = function () {
     var game = new Game(320, 320);
     game.fps = 60;
     game.time = 0;
+    game.ending = false;
+    game.Showres = false;
     game.preload(
         SET_ANIM_EXC,
         SET_ANIM_GOOD,
@@ -122,13 +124,15 @@ window.onload = function () {
         var ResultExce;
 //a
         var res = new Scene(); ; //リザルト画面
-        res.hoge = 0;
         var bgi = new Sprite(320, 320);
         bgi.image = game.assets[RESULT_IMG];
         res.addChild(bgi);
-        res.addEventListener(Event.ENTER_FRAME, function () {
-            this.hoge++;
-            if (this.hoge > 60) game.end(score.score * 10, "あなたのスコアは" + score.score * 10 + "点です！");
+        res.addEventListener(Event.ENTER_FRAME, function(){
+        	game.Showres = true;
+        });
+        res.addEventListener(Event.TOUCH_START, function(){
+            game.ending = true;
+            game.popScene(this);
         });
 
         game.addMark = function (ary, frame, count) {
@@ -141,6 +145,10 @@ window.onload = function () {
         }
 
         game.addEventListener(Event.ENTER_FRAME, function () {
+        	if(game.ending)
+        	{
+        		game.end(score.score * 10, "あなたのスコアは" + score.score * 10 + "点です！");
+        	}
 
             var time = Math.floor(game.assets[Music].currentTime * game.fps);
 
@@ -217,13 +225,11 @@ window.onload = function () {
                     res.addChild(ResultGood);
                     res.addChild(ResultBad);
                     res.addChild(ResultScore);
-
-                    game.pushScene(res);
+                    if(!game.Showres)game.pushScene(res);
                 }
             }
             showScore.setText("SCORE " + score.score * 10);
             showCombo.setText("COMBO " + combo);
-
         });
         game.rootScene.addChild(GameField);
         game.rootScene.addChild(lane);
