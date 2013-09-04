@@ -1,4 +1,4 @@
-enchant.draw = { assets: ['font.png'] };
+enchant.draw = { assets: ['img/font.png'] };
 enchant.draw.Text = enchant.Class.create(enchant.Sprite, {
     initialize: function(posX, posY, txt) {
         var game = enchant.Game.instance;
@@ -24,7 +24,7 @@ enchant.draw.Text = enchant.Class.create(enchant.Sprite, {
             x = charPos % this.widthItemNum;
             y = Math.floor(charPos / this.widthItemNum);
             // drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
-            this.image.draw(game.assets['font.png'], 
+            this.image.draw(game.assets['img/font.png'], 
                 x*this.fontSize, y*this.fontSize, this.fontSize, this.fontSize,
                 i*this.fontSize, 0, this.fontSize, this.fontSize);
         }
@@ -63,7 +63,7 @@ enchant.draw.MutableText = enchant.Class.create(enchant.Sprite, {
             x = charPos % this.widthItemNum;
             y = Math.floor(charPos / this.widthItemNum);
             // drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
-            this.image.draw(game.assets['font.png'], 
+            this.image.draw(game.assets['img/font.png'], 
                 x*this.fontSize, y*this.fontSize, this.fontSize, this.fontSize,
                 i*this.fontSize, 0, this.fontSize, this.fontSize);
         }

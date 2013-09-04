@@ -3,7 +3,7 @@
 *
 *The MIT License
 *
-*Copyright (c) 2012 atm_tk
+*Copyright (c) 2012 telneko
 *
 *Permission is hereby granted, free of charge, to any person obtaining a copy
 *of this software and associated documentation files (the "Software"), to deal
@@ -120,7 +120,7 @@ window.onload = function () {
 
         var CircleS = new Surface(MSize, MSize);
         CircleS.drawCircle(50, 50, 30);
-        for (var i = 0; i < 3; i++) button[i] = new Button(calc(32, i), (i == 1) ? 32 : 80, CircleS, MSize, GameField);
+        for (var i = 0; i < 3; i++) button[i] = new TouchArea(calc(32, i), (i == 1) ? 32 : 80, CircleS, MSize, GameField);
 
         var bar = new Bar(15, barWidth, 13, 40);
         var progress1 = new Sprite(20, 20);
@@ -148,7 +148,6 @@ window.onload = function () {
         var ResultBad;
         var ResultGood;
         var ResultExce;
-//a
         var res = new Scene(); ; //リザルト画面
         var bgi = new Sprite(320, 320);
         bgi.image = game.assets[RESULT_IMG];

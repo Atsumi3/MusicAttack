@@ -4037,7 +4037,7 @@ enchant.Sound.load = function(src, type) {
             var id = 'enchant-audio' + game._soundID++;
             embed.width = embed.height = 1;
             embed.name = id;
-            embed.src = 'sound.swf?id=' + id + '&src=' + src;
+            embed.src = 'enchant/sound.swf?id=' + id + '&src=' + src;
             embed.allowscriptaccess = 'always';
             embed.style.position = 'absolute';
             embed.style.left = '-1px';

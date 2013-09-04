@@ -1,10 +1,10 @@
 var ua = navigator.userAgent;
 if(ua.indexOf("firefox") || ua.indexOf("opera"))
 {
- musicFile = './song/sample/sample.ogg'
+  musicFile = './song/sample/sample.ogg'
 }else{
   musicFile = './song/sample/sample.mp3';
- }
+}
 
 var music = {
 0:'始まりの時',

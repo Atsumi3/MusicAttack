@@ -1,4 +1,5 @@
-//クラスセット
+//クラス
+//花火
 var Pon = enchant.Class.create(enchant.Sprite,{
 	initialize: function(x,y,img,img_num,img_size,button,obj){
 		enchant.Sprite.call(this,img_size,img_size);
@@ -24,7 +25,8 @@ var Pon = enchant.Class.create(enchant.Sprite,{
 	},
 	remove:  function(obj){obj.removeChild(this);}
 });
-var Button = enchant.Class.create(enchant.Sprite,{
+//
+var TouchArea = enchant.Class.create(enchant.Sprite,{
 	initialize: function(x,y,img,img_size,obj){
 		enchant.Sprite.call(this,img_size,img_size);
 		this.x = x; this.y = y; this.image = img;

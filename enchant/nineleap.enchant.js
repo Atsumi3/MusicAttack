@@ -25,7 +25,7 @@
 
 (function () {
 
-    enchant.nineleap = { assets: ['start.png', 'end.png'] };
+    enchant.nineleap = { assets: ['img/start.png', 'img/end.png'] };
 
     /**
     * @scope enchant.nineleap.Game.prototype
@@ -42,7 +42,7 @@
                 var game = this;
                 this.startScene = new SplashScene();
                 this.startScene._element.style.zIndex = 10;
-                this.startScene.image = this.assets['start.png'];
+                this.startScene.image = this.assets['img/start.png'];
                 this.startScene.addEventListener('touchend', function () {
                     if (game.started == false) {
                         if (game.onstart != null) game.onstart();
@@ -64,7 +64,7 @@
                 this.pushScene(this.startScene);
 
                 this.endScene = new SplashScene();
-                this.endScene.image = this.assets['end.png'];
+                this.endScene.image = this.assets['img/end.png'];
             });
             this.scoreQueue = false;
             this.started = false;
