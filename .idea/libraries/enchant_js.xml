@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="enchant.js" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/script/enchant" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/script/enchant" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

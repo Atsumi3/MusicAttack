@@ -25,24 +25,24 @@
 
 (function () {
 
-    enchant.nineleap = { assets: ['img/start.png', 'img/end.png'] };
+    enchant.nineleap = {assets: [IMG_SYSTEM_START, IMG_SYSTEM_END]};
 
     /**
-    * @scope enchant.nineleap.Game.prototype
-    */
+     * @scope enchant.nineleap.Game.prototype
+     */
     enchant.nineleap.Game = enchant.Class.create(enchant.Game, {
         /**
-        *
-        * @param width
-        * @param height
-        */
+         *
+         * @param width
+         * @param height
+         */
         initialize: function (width, height) {
             enchant.Game.call(this, width, height);
             this.addEventListener('load', function () {
                 var game = this;
                 this.startScene = new SplashScene();
                 this.startScene._element.style.zIndex = 10;
-                this.startScene.image = this.assets['img/start.png'];
+                this.startScene.image = this.assets[IMG_SYSTEM_START];
                 this.startScene.addEventListener('touchend', function () {
                     if (game.started == false) {
                         if (game.onstart != null) game.onstart();
@@ -64,7 +64,7 @@
                 this.pushScene(this.startScene);
 
                 this.endScene = new SplashScene();
-                this.endScene.image = this.assets['img/end.png'];
+                this.endScene.image = this.assets[IMG_SYSTEM_END];
             });
             this.scoreQueue = false;
             this.started = false;
@@ -72,7 +72,8 @@
         },
 
         loadImage: function (src, callback) {
-            if (callback == null) callback = function () { };
+            if (callback == null) callback = function () {
+            };
             this.assets[src] = enchant.Surface.load(src);
             this.assets[src].addEventListener('load', callback);
         },
@@ -162,21 +163,22 @@
                 var submit = function () {
                     var id = location.pathname.match(/^\/games\/(\d+)/)[1];
                     location.replace([
-                    'http://9leap.net/games/', id, '/result',
-                    '?score=', encodeURIComponent(score),
-                    '&result=', encodeURIComponent(result)
-                ].join(''));
+                        'http://9leap.net/games/', id, '/result',
+                        '?score=', encodeURIComponent(score),
+                        '&result=', encodeURIComponent(result)
+                    ].join(''));
                 }
                 this.endScene.addEventListener('touchend', submit);
                 window.setTimeout(submit, 3000);
             }
-            enchant.Game.instance.end = function () { };
+            enchant.Game.instance.end = function () {
+            };
         }
     });
 
     /**
-    * @scope enchant.nineleap.SplashScene.prototype
-    */
+     * @scope enchant.nineleap.SplashScene.prototype
+     */
     enchant.nineleap.SplashScene = enchant.Class.create(enchant.Scene, {
         image: {
             get: function () {
